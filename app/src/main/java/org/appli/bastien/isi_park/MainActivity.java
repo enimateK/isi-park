@@ -1,7 +1,10 @@
 package org.appli.bastien.isi_park;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.squareup.otto.Subscribe;
@@ -39,6 +42,14 @@ public class MainActivity extends AppCompatActivity {
         //m_ParkingAdapter = new ParkingAdapter(this, new ArrayList<Parking>());
         m_ParkingAdapter = new ParkingAdapter(this, ListTest);
         m_ListParking.setAdapter(m_ParkingAdapter);
+
+        m_ListParking.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent seePlaceDetailIntent = new Intent(MainActivity.this, ParkingDetailActivity.class);
+                startActivity(seePlaceDetailIntent);
+            }
+        });
 
     }
 
