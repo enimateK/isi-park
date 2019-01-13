@@ -28,8 +28,6 @@ public class ParkingAdapter extends ArrayAdapter<Parking> {
         super(context, -1, park);
     }
 
-    @BindView(R.id.bouton_fav)
-    Switch b_fav;
 
     @BindView(R.id.nom_park)
     TextView t_nom;
@@ -55,11 +53,7 @@ public class ParkingAdapter extends ArrayAdapter<Parking> {
 
         }
         ButterKnife.bind(this, actualView);
-        if (getItem(position).getFavorite()){
-            b_fav.setChecked(true);
-        }else{
-            b_fav.setChecked(false);
-        }
+
         t_nom.setText(getItem(position).getName());
         t_place.setText(getItem(position).getVoiturePlace().toString());
         Double distance = 0 - getItem(position).getLatitude() + 0 - getItem(position).getLongitude();

@@ -22,7 +22,7 @@ public class ParkingDetailActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.activity_detail_parking)
-    public void clickedOnPlaceStreet() {
+    public void clickedOnParking() {
         finish();
     }
 }

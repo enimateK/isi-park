@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
         m_ListParking.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent seePlaceDetailIntent = new Intent(MainActivity.this, ParkingDetailActivity.class);
-                startActivity(seePlaceDetailIntent);
+                Intent seeParkingDetailIntent = new Intent(MainActivity.this, ParkingDetailActivity.class);
+                startActivity(seeParkingDetailIntent);
             }
         });
 
