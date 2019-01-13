@@ -6,4 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".ui.ParkingAdapter">
 
+    <Switch
+        android:id="@+id/bouton_fav"
+        android:layout_width="16dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/nom_park"
+        android:layout_width="161dp"
+        android:layout_height="39dp"
+        android:layout_weight="1"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/place_dispo"
+        android:layout_width="2dp"
+        android:layout_height="41dp"
+        android:layout_weight="1"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/distance_park"
+        android:layout_width="15dp"
+        android:layout_height="39dp"
+        android:layout_weight="1"
+        android:text="TextView" />
 </LinearLayout>
