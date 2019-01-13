@@ -4,32 +4,34 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 
-@Table(name = "Parking")
-public class Parking extends Model {
-    @Column(name = "name")
+//@Table(name = "Parking")
+public class Parking {
+
+    //@Column(name = "name")
     private String name;
-    @Column(name = "description")
+    //@Column(name = "description")
     private String description;
 
-    @Column(name = "latitude")
+    //@Column(name = "latitude")
     private Double latitude;
-    @Column(name = "longitude")
+    //@Column(name = "longitude")
     private Double longitude;
 
-    @Column(name = "voiturePlace")
+    //@Column(name = "voiturePlace")
     private Integer voiturePlace;
-    @Column(name = "motoPlace")
+    //@Column(name = "motoPlace")
     private Integer motoPlace;
-    @Column(name = "veloPlace")
+    //@Column(name = "veloPlace")
     private Integer veloPlace;
 
-    @Column(name = "favorite")
+    //@Column(name = "favorite")
     private Boolean favorite;
 
-    @Column(name = "label", index = true, unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
+    //@Column(name = "label", index = true, unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     private String label;
 
     public Parking (String name, String description, Double longitude, Double latitude, Integer voiturePlace, Integer motoPlace, Integer veloPlace, String label, Boolean favorite){
+        super();
         this.name = name;
         this.description = description;
         this.longitude = longitude;

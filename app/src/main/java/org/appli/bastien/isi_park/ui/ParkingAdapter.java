@@ -1,5 +1,6 @@
 package org.appli.bastien.isi_park.ui;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,11 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import org.appli.bastien.isi_park.R;
 import org.appli.bastien.isi_park.model.Parking;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ParkingAdapter extends ArrayAdapter<Parking> {
 
@@ -21,6 +27,18 @@ public class ParkingAdapter extends ArrayAdapter<Parking> {
     public ParkingAdapter (Context context, List<Parking> park){
         super(context, -1, park);
     }
+
+    @BindView(R.id.bouton_fav)
+    Switch b_fav;
+
+    @BindView(R.id.nom_park)
+    TextView t_nom;
+
+    @BindView(R.id.distance_park)
+    TextView t_distance;
+
+    @BindView(R.id.place_dispo)
+    TextView t_place;
 
     @NonNull
     @Override
@@ -36,6 +54,16 @@ public class ParkingAdapter extends ArrayAdapter<Parking> {
             actualView = inflater.inflate(R.layout.activity_parking_adapter, parent, false);
 
         }
+        ButterKnife.bind(this, actualView);
+        if (getItem(position).getFavorite()){
+            b_fav.setChecked(true);
+        }else{
+            b_fav.setChecked(false);
+        }
+        t_nom.setText(getItem(position).getName());
+        t_place.setText(getItem(position).getVoiturePlace().toString());
+        Double distance = 0 - getItem(position).getLatitude() + 0 - getItem(position).getLongitude();
+        t_distance.setText(distance.toString());
         return actualView;
     }
 }
