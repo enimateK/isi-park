@@ -1,22 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteY="81dp">
 
     <TextView
-        android:id="@+id/activity_detail_parking"
+        android:id="@+id/activity_detail_parking_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="149dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/activity_detail_parking_available_places"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="96dp"
+        android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/activity_detail_parking_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/activity_detail_parking_address"
+        app:layout_constraintTop_toBottomOf="@+id/activity_detail_parking_address" />
+
+    <TextView
+        android:id="@+id/activity_detail_parking_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/activity_detail_parking_handicap_places"
+        app:layout_constraintTop_toBottomOf="@+id/activity_detail_parking_handicap_places" />
+
+    <TextView
+        android:id="@+id/activity_detail_parking_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/activity_detail_parking_handicap_access"
+        app:layout_constraintTop_toTopOf="@+id/activity_detail_parking_handicap_access" />
+
+    <TextView
+        android:id="@+id/activity_detail_parking_website"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/activity_detail_parking_phone"
+        app:layout_constraintTop_toTopOf="@+id/activity_detail_parking_phone" />
+
+    <TextView
+        android:id="@+id/activity_detail_parking_zip_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/activity_detail_parking_schedule"
+        app:layout_constraintTop_toTopOf="@+id/activity_detail_parking_schedule" />
+
+    <TextView
+        android:id="@+id/activity_detail_parking_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/activity_detail_parking_title"
+        app:layout_constraintTop_toTopOf="@+id/activity_detail_parking_title" />
+
+    <TextView
+        android:id="@+id/activity_detail_parking_handicap_access"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/activity_detail_parking_total_places"
+        app:layout_constraintTop_toTopOf="@+id/activity_detail_parking_total_places" />
+
+    <TextView
+        android:id="@+id/activity_detail_parking_handicap_places"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/activity_detail_parking_electric_places"
+        app:layout_constraintTop_toBottomOf="@+id/activity_detail_parking_electric_places" />
+
+    <TextView
+        android:id="@+id/activity_detail_parking_electric_places"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/activity_detail_parking_motorbike_places"
+        app:layout_constraintTop_toBottomOf="@+id/activity_detail_parking_motorbike_places" />
+
+    <TextView
+        android:id="@+id/activity_detail_parking_motorbike_places"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/activity_detail_parking_means_of_payment"
+        app:layout_constraintTop_toBottomOf="@+id/activity_detail_parking_means_of_payment" />
+
+    <TextView
+        android:id="@+id/activity_detail_parking_total_places"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/activity_detail_parking_available_places"
+        app:layout_constraintTop_toTopOf="@+id/activity_detail_parking_available_places" />
+
+    <TextView
+        android:id="@+id/activity_detail_parking_public_transport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/activity_detail_parking_bike_places"
+        app:layout_constraintTop_toTopOf="@+id/activity_detail_parking_bike_places" />
+
+    <TextView
+        android:id="@+id/activity_detail_parking_bike_places"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/activity_detail_parking_zip_code"
+        app:layout_constraintTop_toBottomOf="@+id/activity_detail_parking_zip_code" />
+
+    <TextView
+        android:id="@+id/activity_detail_parking_means_of_payment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/activity_detail_parking_public_transport"
+        app:layout_constraintTop_toBottomOf="@+id/activity_detail_parking_public_transport" />
+
+    <TextView
+        android:id="@+id/activity_detail_parking_schedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/activity_detail_parking_website"
+        app:layout_constraintTop_toTopOf="@+id/activity_detail_parking_website" />
+
 </android.support.constraint.ConstraintLayout>
