@@ -23,11 +23,9 @@ import butterknife.ButterKnife;
 
 public class ParkingAdapter extends ArrayAdapter<Parking> {
 
-
     public ParkingAdapter (Context context, List<Parking> park){
         super(context, -1, park);
     }
-
 
     @BindView(R.id.nom_park)
     TextView t_nom;
@@ -40,24 +38,14 @@ public class ParkingAdapter extends ArrayAdapter<Parking> {
 
     @NonNull
     @Override
-
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-
         View actualView = convertView;
-
         if (convertView == null) {
-
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            actualView = inflater.inflate(R.layout.activity_parking_adapter, parent, false);
-
+            actualView = inflater.inflate(R.layout.parking_adapter, parent, false);
         }
         ButterKnife.bind(this, actualView);
 
-        t_nom.setText(getItem(position).getName());
-        t_place.setText(getItem(position).getVoiturePlace().toString());
-        Double distance = 0 - getItem(position).getLatitude() + 0 - getItem(position).getLongitude();
-        t_distance.setText(distance.toString());
         return actualView;
     }
 }
