@@ -39,6 +39,13 @@ public class Parking extends Model {
     @Column(name = "dispoVoitures")
     public int dispoVoitures;
 
+    @Column(name = "cb")
+    public boolean cb;
+    @Column(name = "espece")
+    public boolean espece;
+    @Column(name = "totalGr")
+    public boolean totalGr;
+
     @Column(name = "favorite")
     public boolean favorite;
 

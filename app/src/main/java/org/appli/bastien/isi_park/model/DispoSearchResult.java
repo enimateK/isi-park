@@ -15,8 +15,6 @@ public class DispoSearchResult {
             public String idobj;
             @Expose
             public int grp_disponible;
-            @Expose
-            public int grp_statut;
         }
     }
 }

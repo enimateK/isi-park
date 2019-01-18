@@ -15,8 +15,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 
-public class FavorisActivity extends BaseActivity {
-
+public class RechercheResultatsActivity extends BaseActivity {
     @BindView(R.id.list_view)
     ListView listView;
     ParkingAdapter adapter;
@@ -44,7 +43,7 @@ public class FavorisActivity extends BaseActivity {
             public void run() {
                 // Step 1: Update adapter's model
                 adapter.clear();
-                adapter.addAll(event.getFavorites());
+                adapter.addAll(event.getParkings()); // TODO
                 // Step 2: hide loader
                 //mProgressBar.setVisibility(View.GONE);
             }

@@ -24,6 +24,8 @@ public class ParkingSearchResult {
             @Expose
             public String commune;
             @Expose
+            public String moyen_paiement;
+            @Expose
             public int capacite_voiture;
             @Expose
             public int capacite_vehicule_electrique;

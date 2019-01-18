@@ -92,6 +92,9 @@ public class ParkingSearchService {
                                 parking.placesVelo = record.fields.capacite_velo;
                                 parking.placesVoituresElectriques = record.fields.capacite_vehicule_electrique;
                                 parking.placesPmr = record.fields.capacite_pmr;
+                                parking.cb = record.fields.moyen_paiement.contains("CB");
+                                parking.espece = record.fields.moyen_paiement.contains("Espèces");
+                                parking.totalGr = record.fields.moyen_paiement.contains("Total GR");
                                 parking.save();
                             }
                             ActiveAndroid.setTransactionSuccessful();
