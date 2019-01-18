@@ -43,10 +43,11 @@ public class Parking extends Model {
     public boolean favorite;
 
     public Parking() {
-
+        super();
     }
 
-    public Parking(String id) {
+    public Parking(String idobj) {
+        super();
         this.idobj = idobj;
     }
 }

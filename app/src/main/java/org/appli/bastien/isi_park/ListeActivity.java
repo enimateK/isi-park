@@ -32,7 +32,8 @@ public class ListeActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        ParkingSearchService.INSTANCE.searchParkingFromDB();
+        ParkingSearchService.INSTANCE.searchAvailabilityFromOpenDataNantes();
+        //ParkingSearchService.INSTANCE.searchParkingFromDB();
     }
 
     @Subscribe

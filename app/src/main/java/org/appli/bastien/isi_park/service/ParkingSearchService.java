@@ -1,6 +1,10 @@
 package org.appli.bastien.isi_park.service;
 
+import android.annotation.SuppressLint;
+import android.os.AsyncTask;
+import android.os.Debug;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.query.Select;
@@ -10,8 +14,11 @@ import com.google.gson.annotations.Expose;
 
 import org.appli.bastien.isi_park.event.EventBusManager;
 import org.appli.bastien.isi_park.event.SearchResultEvent;
+import org.appli.bastien.isi_park.model.DispoSearchResult;
 import org.appli.bastien.isi_park.model.Parking;
+import org.appli.bastien.isi_park.model.ParkingSearchResult;
 
+import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -123,14 +130,14 @@ public class ParkingSearchService {
                 searchParkingFromDB();
 
                 // Step 2 : Call to the REST service
-                mRESTService.searchForAvailability().enqueue(new Callback<AvailabilitySearchResult>() {
+                mRESTService.searchForAvailability().enqueue(new Callback<DispoSearchResult>() {
                     @Override
-                    public void onResponse(Call<AvailabilitySearchResult> call, Response<AvailabilitySearchResult> response) {
+                    public void onResponse(Call<DispoSearchResult> call, Response<DispoSearchResult> response) {
                         // Post an event so that listening activities can update their UI
                         if (response.body() != null && response.body().records != null) {
                             // Save all results in Database
                             ActiveAndroid.beginTransaction();
-                            for (AvailabilitySearchResult.AvailabilityRecord record : response.body().records) {
+                            for (DispoSearchResult.AvailabilityRecord record : response.body().records) {
                                 Parking parking = new Select().from(Parking.class).where("idobj = '" + record.fields.idobj + "'").executeSingle();
                                 if(parking != null) {
                                     parking.dispoVoitures = record.fields.grp_disponible;
@@ -150,7 +157,7 @@ public class ParkingSearchService {
                     }
 
                     @Override
-                    public void onFailure(Call<AvailabilitySearchResult> call, Throwable t) {
+                    public void onFailure(Call<DispoSearchResult> call, Throwable t) {
                         // Request has failed or is not at expected format
                         // We may want to display a warning to user (e.g. Toast)
                         Log.e("[ParkingSearcher] [REST]", "Response error : " + t.getMessage());
@@ -169,58 +176,8 @@ public class ParkingSearchService {
         @GET("/api/records/1.0/search/?dataset=244400404_parkings-publics-nantes&rows=100")
         Call<ParkingSearchResult> searchForParkings();
         @GET("/api/records/1.0/search/?dataset=244400404_parkings-publics-nantes-disponibilites&rows=100")
-        Call<AvailabilitySearchResult> searchForAvailability();
+        Call<DispoSearchResult> searchForAvailability();
     }
 
-    public class ParkingSearchResult {
-        @Expose
-        public List<ParkingRecord> records;
-        public class ParkingRecord {
-            @Expose
-            public ParkingFields fields;
-            public class ParkingFields {
-                @Expose
-                public String idobj;
-                @Expose
-                public String nom_complet;
-                @Expose
-                public String presentation;
-                @Expose
-                public String adresse;
-                @Expose
-                public String code_postal;
-                @Expose
-                public String commune;
-                @Expose
-                public int capacite_voiture;
-                @Expose
-                public int capacite_vehicule_electrique;
-                @Expose
-                public int capacite_pmr;
-                @Expose
-                public int capacite_moto;
-                @Expose
-                public int capacite_velo;
-                @Expose
-                public List<Double> location;
-            }
-        }
-    }
 
-    public class AvailabilitySearchResult {
-        @Expose
-        public List<AvailabilityRecord> records;
-        public class AvailabilityRecord {
-            @Expose
-            public AvailabilityFields fields;
-            public class AvailabilityFields {
-                @Expose
-                public String idobj;
-                @Expose
-                public int grp_disponible;
-                @Expose
-                public int grp_statut;
-            }
-        }
-    }
 }
