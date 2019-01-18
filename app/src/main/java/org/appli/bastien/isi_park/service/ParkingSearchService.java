@@ -85,8 +85,8 @@ public class ParkingSearchService {
                                 parking.adresse = record.fields.adresse;
                                 parking.codePostal = record.fields.code_postal;
                                 parking.ville = record.fields.commune;
-                                parking.longitude = record.fields.location.get(0);
-                                parking.latitude = record.fields.location.get(1);
+                                parking.longitude = record.fields.location.get(1);
+                                parking.latitude = record.fields.location.get(0);
                                 parking.placesVoitures = record.fields.capacite_voiture;
                                 parking.placesMoto = record.fields.capacite_moto;
                                 parking.placesVelo = record.fields.capacite_velo;

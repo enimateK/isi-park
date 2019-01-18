@@ -18,6 +18,9 @@
         <meta-data
             android:name="AA_DB_VERSION"
             android:value="4" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBcRt3W8uifSjrhXBu2467iz9ciQqMNTzM"/>
         <provider
             android:name="com.activeandroid.content.ContentProvider"
             android:authorities="org.appli.bastien.isi_park"
