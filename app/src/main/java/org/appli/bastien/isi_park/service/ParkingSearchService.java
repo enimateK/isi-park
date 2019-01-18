@@ -69,7 +69,7 @@ public class ParkingSearchService {
                             // Save all results in Database
                             ActiveAndroid.beginTransaction();
                             for (ParkingSearchResult.ParkingRecord record : response.body().records) {
-                                Parking parking = new Select().from(Parking.class).where("id = '" + record.fields.idobj + "'").executeSingle();
+                                Parking parking = new Select().from(Parking.class).where("idobj = '" + record.fields.idobj + "'").executeSingle();
                                 if(parking == null) {
                                     parking = new Parking(record.fields.idobj);
                                 }
@@ -110,7 +110,7 @@ public class ParkingSearchService {
         }.run();
     }
 
-    private void searchAvailabilityFromOpenDataNantes() {
+    public void searchAvailabilityFromOpenDataNantes() {
         // Cancel last scheduled network call (if any)
         if (mLastScheduleTask != null && !mLastScheduleTask.isDone()) {
             mLastScheduleTask.cancel(true);
@@ -131,7 +131,7 @@ public class ParkingSearchService {
                             // Save all results in Database
                             ActiveAndroid.beginTransaction();
                             for (AvailabilitySearchResult.AvailabilityRecord record : response.body().records) {
-                                Parking parking = new Select().from(Parking.class).where("id = '" + record.fields.idobj + "'").executeSingle();
+                                Parking parking = new Select().from(Parking.class).where("idobj = '" + record.fields.idobj + "'").executeSingle();
                                 if(parking != null) {
                                     parking.dispoVoitures = record.fields.grp_disponible;
                                     parking.save();

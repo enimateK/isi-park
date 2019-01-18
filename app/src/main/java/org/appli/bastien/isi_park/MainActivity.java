@@ -3,6 +3,8 @@ package org.appli.bastien.isi_park;
 import android.content.Intent;
 import android.os.Bundle;
 
+import org.appli.bastien.isi_park.service.ParkingSearchService;
+
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
@@ -11,6 +13,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ParkingSearchService.INSTANCE.searchParkingFromDataNantes();
     }
 
     @OnClick(R.id.button_liste)

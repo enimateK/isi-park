@@ -6,10 +6,10 @@ import com.activeandroid.query.Select;
 
 import java.util.List;
 
-//@Table(name = "Parking")
+@Table(name = "Parking")
 public class Parking extends Model {
-    @Column(name = "id", index = true, unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
-    public String id;
+    @Column(name = "idobj", index = true, unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
+    public String idobj;
     @Column(name = "name")
     public String name;
     @Column(name = "description")
@@ -42,7 +42,11 @@ public class Parking extends Model {
     @Column(name = "favorite")
     public boolean favorite;
 
+    public Parking() {
+
+    }
+
     public Parking(String id) {
-        this.id = id;
+        this.idobj = idobj;
     }
 }

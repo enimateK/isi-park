@@ -45,7 +45,9 @@ public class ParkingAdapter extends ArrayAdapter<Parking> {
             actualView = inflater.inflate(R.layout.parking_adapter, parent, false);
         }
         ButterKnife.bind(this, actualView);
-
+        t_nom.setText(getItem(position).name);
+        t_distance.setText(Double.toString(0 - getItem(position).latitude + 0 - getItem(position).longitude));
+        t_place.setText(getItem(position).dispoVoitures + "/" + getItem(position).placesVoitures);
         return actualView;
     }
 }
