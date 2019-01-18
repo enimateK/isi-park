@@ -26,7 +26,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
 
 public class ParkingSearchService {
 
@@ -58,6 +57,60 @@ public class ParkingSearchService {
     }
 
     public void searchParkingFromDataNantes() {
+        new Runnable() {
+            public void run() {
+                searchParkingFromDB();
+
+                mRESTService.searchForParkings().enqueue(new Callback<ParkingSearchResult>() {
+                    @Override
+                    public void onResponse(Call<ParkingSearchResult> call, Response<ParkingSearchResult> response) {
+                        // Post an event so that listening activities can update their UI
+                        if (response.body() != null && response.body().records != null) {
+                            // Save all results in Database
+                            ActiveAndroid.beginTransaction();
+                            for (ParkingSearchResult.ParkingRecord record : response.body().records) {
+                                Parking parking = new Select().from(Parking.class).where("id = '" + record.fields.idobj + "'").executeSingle();
+                                if(parking == null) {
+                                    parking = new Parking(record.fields.idobj);
+                                }
+                                parking.name = record.fields.nom_complet;
+                                parking.description = record.fields.presentation;
+                                parking.adresse = record.fields.adresse;
+                                parking.codePostal = record.fields.code_postal;
+                                parking.ville = record.fields.commune;
+                                parking.longitude = record.fields.location.get(0);
+                                parking.latitude = record.fields.location.get(1);
+                                parking.placesVoitures = record.fields.capacite_voiture;
+                                parking.placesMoto = record.fields.capacite_moto;
+                                parking.placesVelo = record.fields.capacite_velo;
+                                parking.placesVoituresElectriques = record.fields.capacite_vehicule_electrique;
+                                parking.placesPmr = record.fields.capacite_pmr;
+                                parking.save();
+                            }
+                            ActiveAndroid.setTransactionSuccessful();
+                            ActiveAndroid.endTransaction();
+
+                            // Send a new event with results from network
+                            searchAvailabilityFromOpenDataNantes();
+                        } else {
+                            // Null result
+                            // We may want to display a warning to user (e.g. Toast)
+                            Log.e("[ParkingSearcher] [REST]", "Response error : null body");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ParkingSearchResult> call, Throwable t) {
+                        // Request has failed or is not at expected format
+                        // We may want to display a warning to user (e.g. Toast)
+                        Log.e("[ParkingSearcher] [REST]", "Response error : " + t.getMessage());
+                    }
+                });
+            }
+        }.run();
+    }
+
+    private void searchAvailabilityFromOpenDataNantes() {
         // Cancel last scheduled network call (if any)
         if (mLastScheduleTask != null && !mLastScheduleTask.isDone()) {
             mLastScheduleTask.cancel(true);
@@ -70,15 +123,19 @@ public class ParkingSearchService {
                 searchParkingFromDB();
 
                 // Step 2 : Call to the REST service
-                mRESTService.searchForParkings().enqueue(new Callback<ParkingSearchResult>() {
+                mRESTService.searchForAvailability().enqueue(new Callback<AvailabilitySearchResult>() {
                     @Override
-                    public void onResponse(Call<ParkingSearchResult> call, Response<ParkingSearchResult> response) {
+                    public void onResponse(Call<AvailabilitySearchResult> call, Response<AvailabilitySearchResult> response) {
                         // Post an event so that listening activities can update their UI
                         if (response.body() != null && response.body().records != null) {
                             // Save all results in Database
                             ActiveAndroid.beginTransaction();
-                            for (ParkingSearchResult.ParkingRecord record : response.body().records) {
-                                // TODO convertir en Parking
+                            for (AvailabilitySearchResult.AvailabilityRecord record : response.body().records) {
+                                Parking parking = new Select().from(Parking.class).where("id = '" + record.fields.idobj + "'").executeSingle();
+                                if(parking != null) {
+                                    parking.dispoVoitures = record.fields.grp_disponible;
+                                    parking.save();
+                                }
                             }
                             ActiveAndroid.setTransactionSuccessful();
                             ActiveAndroid.endTransaction();
@@ -93,7 +150,7 @@ public class ParkingSearchService {
                     }
 
                     @Override
-                    public void onFailure(Call<ParkingSearchResult> call, Throwable t) {
+                    public void onFailure(Call<AvailabilitySearchResult> call, Throwable t) {
                         // Request has failed or is not at expected format
                         // We may want to display a warning to user (e.g. Toast)
                         Log.e("[ParkingSearcher] [REST]", "Response error : " + t.getMessage());
@@ -129,8 +186,6 @@ public class ParkingSearchService {
                 @Expose
                 public String presentation;
                 @Expose
-                public String acces_transports_communs;
-                @Expose
                 public String adresse;
                 @Expose
                 public String code_postal;
@@ -160,7 +215,7 @@ public class ParkingSearchService {
             public AvailabilityFields fields;
             public class AvailabilityFields {
                 @Expose
-                public int idobj;
+                public String idobj;
                 @Expose
                 public int grp_disponible;
                 @Expose

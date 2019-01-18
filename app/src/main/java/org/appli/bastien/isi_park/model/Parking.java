@@ -8,20 +8,18 @@ import java.util.List;
 
 //@Table(name = "Parking")
 public class Parking extends Model {
-    public static List<Parking> parkings;
-    public static Parking getParking(String id) {
-        for(Parking parking : parkings) {
-            if(parking.id.equals(id))
-                return parking;
-        }
-        return new Parking();
-    }
     @Column(name = "id", index = true, unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     public String id;
     @Column(name = "name")
     public String name;
     @Column(name = "description")
     public String description;
+    @Column(name = "adresse")
+    public String adresse;
+    @Column(name = "codePostal")
+    public String codePostal;
+    @Column(name = "ville")
+    public String ville;
 
     @Column(name = "latitude")
     public Double latitude;
@@ -34,9 +32,17 @@ public class Parking extends Model {
     public int placesMoto;
     @Column(name = "placesVelo")
     public int placesVelo;
+    @Column(name = "placesPmr")
+    public int placesPmr;
+    @Column(name = "placesVoituresElectriques")
+    public int placesVoituresElectriques;
     @Column(name = "dispoVoitures")
     public int dispoVoitures;
 
     @Column(name = "favorite")
     public boolean favorite;
+
+    public Parking(String id) {
+        this.id = id;
+    }
 }
