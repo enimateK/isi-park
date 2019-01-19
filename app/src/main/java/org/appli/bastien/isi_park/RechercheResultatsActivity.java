@@ -2,6 +2,8 @@ package org.appli.bastien.isi_park;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -41,6 +43,23 @@ public class RechercheResultatsActivity extends BaseActivity {
         espece = getIntent().getBooleanExtra("espece", false);
         total_gr = getIntent().getBooleanExtra("total_gr", false);
         dispo = getIntent().getIntExtra("dispo", 0);
+
+        recherche.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                ParkingSearchService.INSTANCE.searchParkingFromDB();
+            }
+        });
     }
 
     @Override

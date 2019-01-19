@@ -88,9 +88,10 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/recherche_label_dispo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombre de places disponibles"
+        android:text="Nombre de places disponibles (0)"
         android:paddingTop="10dp"/>
 
     <SeekBar
@@ -98,7 +99,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:max="10"/>
 
     <Button
         android:id="@+id/button_recherche_valider"

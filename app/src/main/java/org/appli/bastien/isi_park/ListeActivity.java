@@ -4,6 +4,9 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.squareup.otto.Subscribe;
@@ -20,6 +23,9 @@ import butterknife.OnItemClick;
 
 public class ListeActivity extends BaseActivity {
 
+    @BindView(R.id.edit_text_recherche)
+    EditText recherche;
+
     @BindView(R.id.list_view)
     ListView listView;
     ParkingAdapter adapter;
@@ -30,6 +36,22 @@ public class ListeActivity extends BaseActivity {
         setContentView(R.layout.activity_liste);
         adapter = new ParkingAdapter(this, new ArrayList<Parking>());
         listView.setAdapter(adapter);
+        recherche.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                ParkingSearchService.INSTANCE.searchParkingFromDB();
+            }
+        });
     }
 
     @Override
@@ -47,7 +69,7 @@ public class ListeActivity extends BaseActivity {
             public void run() {
                 // Step 1: Update adapter's model
                 adapter.clear();
-                adapter.addAll(event.getParkings());
+                adapter.addAll(event.getParkings(recherche.getText().toString()));
                 // Step 2: hide loader
                 //mProgressBar.setVisibility(View.GONE);
             }

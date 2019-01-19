@@ -36,6 +36,8 @@ public class SearchResultEvent {
     }
 
     public List<Parking> getParkings(String filter) {
+        if(filter.equals(""))
+            return getParkings();
         List<Parking> tmp = new ArrayList<>();
         for(Parking parking : getParkings()) {
             if(parking.name.toLowerCase().contains(filter.toLowerCase().trim())) {
@@ -54,7 +56,7 @@ public class SearchResultEvent {
                 continue;
             if(!adresse.equals("") && !parking.adresse.toLowerCase().contains(adresse.toLowerCase().trim()))
                 continue;
-            if(dispo != 0 && parking.dispoVoitures < dispo)
+            if(dispo != 0 && parking.dispoVoitures > dispo)
                 continue;
             if(cb != false && parking.cb != cb)
                 continue;

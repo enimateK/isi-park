@@ -2,6 +2,9 @@ package org.appli.bastien.isi_park;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.squareup.otto.Subscribe;
@@ -17,6 +20,8 @@ import butterknife.BindView;
 
 public class FavorisActivity extends BaseActivity {
 
+    @BindView(R.id.edit_text_recherche)
+    EditText recherche;
     @BindView(R.id.list_view)
     ListView listView;
     ParkingAdapter adapter;
@@ -27,6 +32,22 @@ public class FavorisActivity extends BaseActivity {
         setContentView(R.layout.activity_liste);
         adapter = new ParkingAdapter(this, new ArrayList<Parking>());
         listView.setAdapter(adapter);
+        recherche.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                ParkingSearchService.INSTANCE.searchParkingFromDB();
+            }
+        });
     }
 
     @Override
