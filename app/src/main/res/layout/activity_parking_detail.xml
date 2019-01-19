@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/title_bar">
+        <ImageButton
+            android:id="@+id/button_retour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_arrow_back"
+            android:scaleType="fitCenter"
+            android:minHeight="30dp"
+            android:minWidth="30dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:text="ISI PARK"/>
+    </Toolbar>
+
+    <TextView
+        android:id="@+id/activity_detail_parking_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="titre"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/activity_detail_parking_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="description"/>
+
+    <TextView
+        android:id="@+id/activity_detail_parking_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="adresse" />
+
+    <TextView
+        android:id="@+id/activity_detail_parking_available_places"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="dispo voitures" />
+
+    <TextView
+        android:id="@+id/activity_detail_parking_total_places"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="totalplaces"/>
+
+    <TextView
+        android:id="@+id/activity_detail_parking_bike_places"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="bikeplaces"/>
+
+    <TextView
+        android:id="@+id/activity_detail_parking_motorbike_places"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="motorbikeplaces"/>
+
+    <TextView
+        android:id="@+id/activity_detail_parking_pmr_places"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="pmr"/>
+
+    <TextView
+        android:id="@+id/activity_detail_parking_electric_places"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="electric"/>
+
+    <TextView
+        android:id="@+id/activity_detail_parking_means_of_payment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="payment"/>
+
+    <Button
+        android:id="@+id/activity_detail_favoris"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ajouter aux favoris" />
+
+    <fragment
+        android:id="@+id/activity_detail_street_view"
+        android:name="com.google.android.gms.maps.SupportStreetViewPanoramaFragment"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

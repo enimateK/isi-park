@@ -12,15 +12,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        //DB de parking
-        <!--
         <meta-data
             android:name="AA_DB_NAME"
             android:value="ISI_Park" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="1" />
-        -->
+            android:value="6" />
+        <meta-data
+            android:name="AA_MODELS"
+            android:value=".model.Parking"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBcRt3W8uifSjrhXBu2467iz9ciQqMNTzM"/>
+        <provider
+            android:name="com.activeandroid.content.ContentProvider"
+            android:authorities="org.appli.bastien.isi_park"
+            android:enabled="true"
+            android:exported="false">
+        </provider>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +37,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ListeActivity" />
+        <activity android:name=".MapActivity" />
+        <activity android:name=".ParkingDetailActivity" />
+        <activity android:name=".FavorisActivity" />
+        <activity android:name=".RechercheActivity" />
+        <activity android:name=".ParamActivity" />
+        <activity android:name=".RechercheResultatsActivity" />
     </application>
 
 </manifest>

@@ -4,115 +4,57 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 
-//@Table(name = "Parking")
-public class Parking {
+import java.util.List;
 
-    //@Column(name = "name")
-    private String name;
-    //@Column(name = "description")
-    private String description;
+@Table(name = "Parking")
+public class Parking extends Model {
+    @Column(name = "idobj", index = true, unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
+    public String idobj;
+    @Column(name = "name")
+    public String name;
+    @Column(name = "description")
+    public String description;
+    @Column(name = "adresse")
+    public String adresse;
+    @Column(name = "codePostal")
+    public String codePostal;
+    @Column(name = "ville")
+    public String ville;
 
-    //@Column(name = "latitude")
-    private Double latitude;
-    //@Column(name = "longitude")
-    private Double longitude;
+    @Column(name = "latitude")
+    public Double latitude;
+    @Column(name = "longitude")
+    public Double longitude;
 
-    //@Column(name = "voiturePlace")
-    private Integer voiturePlace;
-    //@Column(name = "motoPlace")
-    private Integer motoPlace;
-    //@Column(name = "veloPlace")
-    private Integer veloPlace;
+    @Column(name = "placesVoitures")
+    public int placesVoitures;
+    @Column(name = "placesMoto")
+    public int placesMoto;
+    @Column(name = "placesVelo")
+    public int placesVelo;
+    @Column(name = "placesPmr")
+    public int placesPmr;
+    @Column(name = "placesVoituresElectriques")
+    public int placesVoituresElectriques;
+    @Column(name = "dispoVoitures")
+    public int dispoVoitures;
 
-    //@Column(name = "favorite")
-    private Boolean favorite;
+    @Column(name = "cb")
+    public boolean cb;
+    @Column(name = "espece")
+    public boolean espece;
+    @Column(name = "totalGr")
+    public boolean totalGr;
 
-    //@Column(name = "label", index = true, unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
-    private String label;
+    @Column(name = "favorite")
+    public boolean favorite;
 
-    public Parking (String name, String description, Double longitude, Double latitude, Integer voiturePlace, Integer motoPlace, Integer veloPlace, String label, Boolean favorite){
+    public Parking() {
         super();
-        this.name = name;
-        this.description = description;
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.voiturePlace = voiturePlace;
-        this.motoPlace = motoPlace;
-        this.veloPlace = veloPlace;
-        this.favorite = favorite;
-        this.label = label;
     }
 
-    public String getName() {
-        return name;
+    public Parking(String idobj) {
+        super();
+        this.idobj = idobj;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
-    }
-
-    public Integer getVoiturePlace() {
-        return voiturePlace;
-    }
-
-    public void setVoiturePlace(Integer voiturePlace) {
-        this.voiturePlace = voiturePlace;
-    }
-
-    public Integer getMotoPlace() {
-        return motoPlace;
-    }
-
-    public void setMotoPlace(Integer motoPlace) {
-        this.motoPlace = motoPlace;
-    }
-
-    public Integer getVeloPlace() {
-        return veloPlace;
-    }
-
-    public void setVeloPlace(Integer veloPlace) {
-        this.veloPlace = veloPlace;
-    }
-
-    public Boolean getFavorite() {
-        return favorite;
-    }
-
-    public void setFavorite(Boolean favorite) {
-        this.favorite = favorite;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
 }
