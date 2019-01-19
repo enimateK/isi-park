@@ -38,27 +38,29 @@ public class SearchResultEvent {
     public List<Parking> getParkings(String filter) {
         List<Parking> tmp = new ArrayList<>();
         for(Parking parking : getParkings()) {
-            if(parking.name.contains(filter)) {
+            if(parking.name.toLowerCase().contains(filter.toLowerCase().trim())) {
                 tmp.add(parking);
             }
         }
         return tmp;
     }
 
-    public List<Parking> getParkings(String name, String adresse, Integer dispo, Boolean cb, Boolean espece, Boolean total_gr) {
+    public List<Parking> getParkings(String recherche, String name, String adresse, int dispo, boolean cb, boolean espece, boolean total_gr) {
         List<Parking> tmp = new ArrayList<>();
         for(Parking parking : getParkings()) {
-            if(name != null && !parking.name.contains(name))
+            if(!recherche.equals("") && !parking.name.toLowerCase().contains(recherche.toLowerCase().trim()))
                 continue;
-            if(adresse != null && !parking.adresse.contains(adresse))
+            if(!name.equals("") && !parking.name.toLowerCase().contains(name.toLowerCase().trim()))
                 continue;
-            if(dispo != null && parking.dispoVoitures < dispo)
+            if(!adresse.equals("") && !parking.adresse.toLowerCase().contains(adresse.toLowerCase().trim()))
                 continue;
-            if(cb != null && parking.cb != cb)
+            if(dispo != 0 && parking.dispoVoitures < dispo)
                 continue;
-            if(espece != null && parking.espece != espece)
+            if(cb != false && parking.cb != cb)
                 continue;
-            if(total_gr != null && parking.totalGr != total_gr)
+            if(espece != false && parking.espece != espece)
+                continue;
+            if(total_gr != false && parking.totalGr != total_gr)
                 continue;
             tmp.add(parking);
         }

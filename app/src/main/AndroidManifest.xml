@@ -6,7 +6,7 @@
 
     <application
         android:name="com.activeandroid.app.Application"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -17,7 +17,7 @@
             android:value="ISI_Park" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="4" />
+            android:value="5" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBcRt3W8uifSjrhXBu2467iz9ciQqMNTzM"/>
@@ -40,6 +40,7 @@
         <activity android:name=".FavorisActivity" />
         <activity android:name=".RechercheActivity" />
         <activity android:name=".ParamActivity" />
+        <activity android:name=".RechercheResultatsActivity" />
     </application>
 
 </manifest>

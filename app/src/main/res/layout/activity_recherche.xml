@@ -25,4 +25,85 @@
             android:text="ISI PARK"/>
     </Toolbar>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adresse"/>
+
+        <EditText
+            android:id="@+id/recherche_adresse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nom"/>
+
+        <EditText
+            android:id="@+id/recherche_nom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="10dp">
+
+        <CheckBox
+            android:id="@+id/recherche_cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Carte bancaire"/>
+
+        <CheckBox
+            android:id="@+id/recherche_espece"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Espèces"/>
+
+        <CheckBox
+            android:id="@+id/recherche_total_gr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total GR"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre de places disponibles"
+        android:paddingTop="10dp"/>
+
+    <SeekBar
+        android:id="@+id/recherche_dispo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+
+    <Button
+        android:id="@+id/button_recherche_valider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rechercher"/>
+
 </LinearLayout>
