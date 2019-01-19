@@ -19,6 +19,9 @@
             android:name="AA_DB_VERSION"
             android:value="5" />
         <meta-data
+            android:name="AA_MODELS"
+            android:value=".model.Parking"/>
+        <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBcRt3W8uifSjrhXBu2467iz9ciQqMNTzM"/>
         <provider
