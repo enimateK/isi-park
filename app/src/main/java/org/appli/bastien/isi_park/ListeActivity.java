@@ -1,5 +1,7 @@
 package org.appli.bastien.isi_park;
 
+import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.ListView;
@@ -14,6 +16,7 @@ import org.appli.bastien.isi_park.ui.ParkingAdapter;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnItemClick;
 
 public class ListeActivity extends BaseActivity {
 
@@ -49,5 +52,13 @@ public class ListeActivity extends BaseActivity {
                 //mProgressBar.setVisibility(View.GONE);
             }
         });
+    }
+
+    @OnItemClick(R.id.list_view)
+    public void onItemSelected(int position) {
+        Intent intent = new Intent(ListeActivity.this, ParkingDetailActivity.class);
+        Parking parking = adapter.getItem(position);
+        intent.putExtra("parking", parking.idobj);
+        startActivity(intent);
     }
 }

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -30,8 +31,23 @@ public class ParkingAdapter extends ArrayAdapter<Parking> {
     @BindView(R.id.nom_park)
     TextView t_nom;
 
-    @BindView(R.id.distance_park)
-    TextView t_distance;
+    @BindView(R.id.adresse_park)
+    TextView t_adresse;
+
+    @BindView(R.id.fav_park)
+    ImageView t_fav;
+
+    @BindView(R.id.no_fav_park)
+    ImageView t_no_fav;
+
+    @BindView(R.id.cb_park)
+    ImageView t_cb;
+
+    @BindView(R.id.espece_park)
+    ImageView t_espece;
+
+    @BindView(R.id.total_gr_park)
+    ImageView t_total_gr;
 
     @BindView(R.id.place_dispo)
     TextView t_place;
@@ -46,8 +62,30 @@ public class ParkingAdapter extends ArrayAdapter<Parking> {
         }
         ButterKnife.bind(this, actualView);
         t_nom.setText(getItem(position).name);
-        t_distance.setText(Double.toString(0 - getItem(position).latitude + 0 - getItem(position).longitude));
+        t_adresse.setText(getItem(position).adresse);
         t_place.setText(getItem(position).dispoVoitures + "/" + getItem(position).placesVoitures);
+        if(getItem(position).favorite) {
+            t_fav.setVisibility(View.VISIBLE);
+            t_no_fav.setVisibility(View.GONE);
+        } else {
+            t_fav.setVisibility(View.GONE);
+            t_no_fav.setVisibility(View.VISIBLE);
+        }
+        if(getItem(position).cb) {
+            t_cb.setVisibility(View.VISIBLE);
+        } else {
+            t_cb.setVisibility(View.GONE);
+        }
+        if(getItem(position).espece) {
+            t_espece.setVisibility(View.VISIBLE);
+        } else {
+            t_espece.setVisibility(View.GONE);
+        }
+        if(getItem(position).totalGr) {
+            t_total_gr.setVisibility(View.VISIBLE);
+        } else {
+            t_total_gr.setVisibility(View.GONE);
+        }
         return actualView;
     }
 }
