@@ -88,8 +88,8 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
                         // Step 2: define marker options
                         MarkerOptions markerOptions = new MarkerOptions()
                                 .position(new LatLng(parking.latitude, parking.longitude))
-                                .title(parking.name)
-                                .snippet(parking.codePostal + "  " + parking.ville)
+                                .title(parking.name + " (" + parking.dispoVoitures + " places)")
+                                .snippet(parking.adresse);
                                 /*.icon(BitmapDescriptorFactory.fromBitmap(resizedBitmap))*/;
 
                         // Step 3: include marker in camera bounds
