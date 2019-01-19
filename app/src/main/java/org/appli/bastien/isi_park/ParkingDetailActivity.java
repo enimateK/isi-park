@@ -2,13 +2,24 @@ package org.appli.bastien.isi_park;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
+import com.google.android.gms.maps.StreetViewPanorama;
+import com.google.android.gms.maps.SupportStreetViewPanoramaFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.squareup.otto.Subscribe;
+
+import org.appli.bastien.isi_park.event.SearchResultEvent;
+import org.appli.bastien.isi_park.model.Parking;
+import org.appli.bastien.isi_park.service.ParkingSearchService;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ParkingDetailActivity extends AppCompatActivity {
+public class ParkingDetailActivity extends BaseActivity implements OnStreetViewPanoramaReadyCallback {
     @BindView(R.id.activity_detail_parking_title)
     TextView name;
 
@@ -18,32 +29,11 @@ public class ParkingDetailActivity extends AppCompatActivity {
     @BindView(R.id.activity_detail_parking_available_places)
     TextView availablePlaces;
 
-    @BindView(R.id.activity_detail_parking_category)
-    TextView category;
-
     @BindView(R.id.activity_detail_parking_address)
     TextView address;
 
-    @BindView(R.id.activity_detail_parking_phone)
-    TextView phone;
-
-    @BindView(R.id.activity_detail_parking_website)
-    TextView website;
-
-    @BindView(R.id.activity_detail_parking_zip_code)
-    TextView zipCode;
-
     @BindView(R.id.activity_detail_parking_description)
     TextView description;
-
-    @BindView(R.id.activity_detail_parking_handicap_access)
-    TextView handicapAccess;
-
-    @BindView(R.id.activity_detail_parking_handicap_places)
-    TextView handicapPlaces;
-
-    @BindView(R.id.activity_detail_parking_electric_places)
-    TextView electricPlaces;
 
     @BindView(R.id.activity_detail_parking_motorbike_places)
     TextView motorbikePlaces;
@@ -51,43 +41,75 @@ public class ParkingDetailActivity extends AppCompatActivity {
     @BindView(R.id.activity_detail_parking_bike_places)
     TextView bikePlaces;
 
-    @BindView(R.id.activity_detail_parking_public_transport)
-    TextView publicTransport;
+    @BindView(R.id.activity_detail_parking_pmr_places)
+    TextView pmrPlaces;
+
+    @BindView(R.id.activity_detail_parking_electric_places)
+    TextView electricPlaces;
 
     @BindView(R.id.activity_detail_parking_means_of_payment)
     TextView meansOfPayment;
 
-    @BindView(R.id.activity_detail_parking_schedule)
-    TextView schedule;
+    @BindView(R.id.activity_detail_favoris)
+    Button favoris;
+
+    String idobj;
+    Parking parking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parking_detail);
 
-        ButterKnife.bind(this);
-        name.setText("Nom du parking");
-        totalPlaces.setText("Nombre de place total : " + "10");
-        availablePlaces.setText("Nombre de place disponibles : " + "10");
-        address.setText("Adresse du parking : " + "10");
-        phone.setText("Téléphone : " + "10");
-        website.setText("Site web : " + "10");
-        zipCode.setText("Code postal : " + "10");
-        description.setText("Description du parking");
-        handicapAccess.setText("Accès handicapé : " + "10");
-        handicapPlaces.setText("Nombre de place handicapés : " + "10");
-        electricPlaces.setText("Nombre de place véhicule électrique : " + "10");
-        motorbikePlaces.setText("Nombre de place motos : " + "10");
-        bikePlaces.setText("Places de vélo : " + "10");
-        publicTransport.setText("Transports proches : " + "10");
-        bikePlaces.setText("Places de vélo : " + "10");
-        meansOfPayment.setText("Moyens de paiement : " + "10");
-        schedule.setText("Horaires : " + "10");
-        category.setText("Catégorie : " + "10");
+        idobj = getIntent().getStringExtra("parking");
+        SupportStreetViewPanoramaFragment streetViewPanoramaFragment = (SupportStreetViewPanoramaFragment)getSupportFragmentManager().findFragmentById(R.id.activity_detail_street_view);
+        streetViewPanoramaFragment.getStreetViewPanoramaAsync(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ParkingSearchService.INSTANCE.searchParkingFromDB(idobj);
+    }
+
+    @Subscribe
+    public void searchResult(final SearchResultEvent event) {
+        // Here someone has posted a SearchResultEvent
+        // Run on ui thread as we want to update UI
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                parking = event.getParking(idobj);
+                name.setText(parking.name);
+                totalPlaces.setText("Nombre de places total : " + parking.placesVoitures);
+                availablePlaces.setText("Nombre de places disponibles : " + parking.dispoVoitures);
+                address.setText(parking.adresse + " " + parking.codePostal + " " + parking.ville);
+                description.setText(parking.description);
+                motorbikePlaces.setText("Nombre de places motos : " + parking.placesMoto);
+                bikePlaces.setText("Nombre de places vélo : " + parking.placesVelo);
+                pmrPlaces.setText("Nombre de places PMR : " + parking.placesPmr);
+                electricPlaces.setText("Nombre de places voitures électriques : " + parking.placesVoituresElectriques);
+                String payment = (parking.cb ? ",Carte bancaire" : "") + (parking.espece ? ",Espèces" : "") + (parking.totalGr ? ",Total GR" : "");
+                meansOfPayment.setText("Moyens de paiement : " + payment.substring(1, payment.length() - 1));
+                favoris.setText(parking.favorite ? "Retirer des favoris" : "Ajouter aux favoris");
+            }
+        });
+    }
+
+    @OnClick(R.id.activity_detail_favoris)
+    public void favoris() {
+        parking.favorite = !parking.favorite;
+        parking.save();
+        favoris.setText(parking.favorite ? "Retirer des favoris" : "Ajouter aux favoris");
     }
 
     @OnClick(R.id.activity_detail_parking_title)
     public void clickedOnParking() {
         finish();
+    }
+
+    @Override
+    public void onStreetViewPanoramaReady(StreetViewPanorama streetViewPanorama) {
+        streetViewPanorama.setPosition(new LatLng(parking.latitude, parking.longitude));
     }
 }

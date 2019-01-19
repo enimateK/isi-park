@@ -54,7 +54,7 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
             public void onInfoWindowClick(Marker marker) {
                 Parking parking = mMarkersToPlaces.get(marker.getId());
                 Intent intent = new Intent(MapActivity.this, ParkingDetailActivity.class);
-                intent.putExtra("placeStreet", parking.idobj);
+                intent.putExtra("parking", parking.idobj);
                 startActivity(intent);
             }
         });

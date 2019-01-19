@@ -179,6 +179,11 @@ public class ParkingSearchService {
         EventBusManager.BUS.post(new SearchResultEvent(parkings));
     }
 
+    public void searchParkingFromDB(String idobj) {
+        List<Parking> parkings = new Select().from(Parking.class).where("idobj='" + idobj + "'").execute();
+        EventBusManager.BUS.post(new SearchResultEvent(parkings));
+    }
+
     public interface ParkingSearchRESTService {
         @GET("/api/records/1.0/search/?dataset=244400404_parkings-publics-nantes&rows=100")
         Call<ParkingSearchResult> searchForParkings();
